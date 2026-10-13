@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1회차 — 명령어 하나 — AI로 쓰는 내 진로 한 문장</title>
+<style>/* 참가자 배포자료 공통 스타일 — ⛔인라인으로 각 파일에 복사되어 들어간다(오프라인 · 폰에서 열림).
+   고칠 때는 여기를 고치고 `python3 .claude/scripts/build-handout.py` 로 세 파일에 내린다. */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color:#111; background:#fff; line-height:1.62;
+  padding:28px 20px 72px; max-width:760px; margin:0 auto;
+  -webkit-text-size-adjust:100%;
+}
+.kick{font-size:13px;font-weight:800;letter-spacing:.14em;color:#1B4D8F}
+h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.25;margin:8px 0 6px}
+h1 em{font-style:normal;color:#1B4D8F}
+.sub{font-size:15px;color:#555;margin-bottom:26px}
+.rule{height:2px;background:#111;margin:22px 0 26px}
+
+.how{background:#F4F6FA;border-left:4px solid #1B4D8F;padding:16px 18px;border-radius:0 8px 8px 0;margin-bottom:30px}
+.how b{color:#1B4D8F}
+.how ol{margin:8px 0 0 18px;font-size:15px}
+.how li{margin:3px 0}
+.how .note{font-size:13.5px;color:#666;margin-top:10px}
+
+.p{border:2px solid #E4E2DD;border-radius:12px;padding:18px 18px 16px;margin-bottom:22px}
+.p.new{border-color:#1B4D8F}
+.p.opt{border-style:dashed;border-color:#8A8A8A;background:#FCFBF8}  /* ★10-02 선택 칸(#238) */
+.ptop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.tag{font-size:14px;font-weight:800;color:#fff;background:#1B4D8F;padding:3px 9px;border-radius:5px;letter-spacing:.02em}
+.p:not(.new) .tag{background:#8A8A8A}
+.pt{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.badge{font-size:11.5px;font-weight:800;color:#B45309;background:#FEF3C7;padding:2px 7px;border-radius:4px}
+.pw{font-size:13.5px;color:#666;margin-bottom:11px}
+.box{background:#FAFAF8;border:1px solid #E4E2DD;border-radius:8px;padding:14px;
+     font-size:14.5px;line-height:1.72;white-space:pre-wrap;word-break:keep-all}
+.box .fill{background:#FFF3B0;padding:0 3px;border-radius:3px;font-weight:700}
+.tip{font-size:13.5px;color:#555;margin-top:10px;padding-left:14px;border-left:2px solid #E4E2DD}
+.tip b{color:#111}
+
+/* 「메모는 아무도 안 본다」 — 세 도구 공통 원칙. 학생이 집에서 적을 때 시작을 막는 게 이것이라 맨 앞에 둔다 */
+.priv{background:#FFFDF5;border:1px solid #E8D9A8;border-left:4px solid #B45309;
+      border-radius:0 8px 8px 0;padding:15px 17px;margin-bottom:26px;font-size:14.5px}
+.priv b{color:#B45309}
+.priv .who{margin-top:7px;font-size:15px;color:#111}
+.priv .why{margin-top:9px;font-size:13.5px;color:#666;padding-left:12px;border-left:2px solid #E8D9A8}
+
+.warn{background:#FFF7ED;border:1px solid #FDBA74;border-radius:10px;padding:15px 17px;font-size:14.5px;margin:28px 0}
+.warn b{color:#B45309}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid #E4E2DD;font-size:13.5px;color:#666}
+.foot b{color:#111}
+
+@media print{
+  body{padding:0;max-width:none;font-size:11.5pt}
+  .p{break-inside:avoid;page-break-inside:avoid}
+  .how,.warn{break-inside:avoid}
+}
+@media (max-width:520px){
+  body{padding:20px 14px 60px}
+  h1{font-size:25px}
+  .box{font-size:14px}
+}
+
+/* ★10-08 #299 「오늘 만든 것」 칸 — 회차 정리(강의 끝나고 공개) */
+.made{background:#F3F8F4;border-left:4px solid #2E7D4F;padding:14px 18px;border-radius:0 8px 8px 0;margin-bottom:26px}
+.made b{color:#2E7D4F}
+.made ul{margin:8px 0 0 18px;font-size:15px}
+.made li{margin:4px 0}
+.made li b{color:#111}
+</style></head><body>
+<div class="kick">서울청년센터 마포 · 청년 진로 · 전 3회</div>
+<h1>1회차 — <em>명령어</em> 하나</h1>
+<div class="sub">오늘 쓴 것 + 집에서 쓸 것. <b>외우지 마세요 — 복사해서 붙여넣기만 하면 됩니다.</b></div>
+<div class="rule"></div>
+<div class="made"><b>오늘 만든 것</b><ul><li><b>한 줄 정의</b>의 틀 — 「나는 ___할 때 살아있다는 느낌이 든다」</li><li><b>CT 메모</b> — 밖에서 일어난 일 + 그때 내 몸이 한 일, 한 줄(날짜 · 장소)</li><li><b>하루 한 줄</b> — 오늘 밤부터, 폰 메모장 한 곳에</li><li><b>한 주에 한 번</b> — 조용할 때 그 주 메모를 옮겨 적으며 「상황 · 의미」 두 줄(의미는 시간이 지난 뒤 — 제3자의 시선으로)</li></ul></div>
+
+<div class="how">
+  <b>쓰는 법 — 셋뿐입니다</b>
+  <ol>
+    <li>아래 회색 상자를 <b>통째로 복사</b>합니다</li>
+    <li>AI 채팅창에 <b>붙여넣습니다</b> <span style="color:#666">— 평소 쓰시던 아무거나. 무료로 됩니다</span></li>
+    <li><span style="background:#FFF3B0;padding:0 3px;border-radius:3px;font-weight:700">노란 칸</span>만 내 것으로 바꿔서 보냅니다</li>
+  </ol>
+  <div class="note">가입도 설치도 필요 없습니다. 폰에서 그대로 하셔도 됩니다.</div>
+</div>
+
+<div class="priv">
+  <b>⚠️ 이 메모는 — 아무도 안 봅니다</b>
+  <div class="who">CT 메모 · 불편 메모 · 답사 메모 — <b>셋 다 보는 사람은 「나」와 「AI」뿐입니다.</b> 어디 제출하는 게 아닙니다.</div>
+  <div class="why">남이 볼 거라고 생각하면 <b>「이걸 적어도 되나」부터 따지게</b> 되고 — 그러다 안 적게 됩니다.<br>
+  <b>제목·날짜 없어도 되고, 비문·오탈자 그대로 두셔도 됩니다.</b> 정리는 AI가 합니다.</div>
+</div>
+
+<div class="p new">
+  <div class="ptop"><span class="tag">CT 메모 명령어 — 매주 정리</span><span class="pt">일주일에 한 번 — 정리 노트 통째로</span></div>
+  <div class="pw">이번 주 정리 노트 + 지난주 「누적 요약」 → 강점 후보 · 다음 주에 볼 장면 · 새 「누적 요약」</div>
+  <div class="box">&lt;CRITICAL_CONSTRAINTS&gt;
+[MUST] 모든 강점·해석은 사용자가 붙여넣은 메모 속 실제 장면에서만 끌어낸다. 판단마다 근거 메모를 날짜와 함께 짧게 인용한다.
+[MUST] 누적 메모 개수에 맞는 깊이로 말한다. 1단계(30개 미만)는 직무를 단정하지 않는다. 대신 기록 속 장면이 팀 프로젝트·과제·알바·일상 업무에서 어떤 순간에 도움이 되는지 한두 줄로 짚어 준다. 2단계(30~99개)는 "이런 장면에서 힘을 쓸 수 있다" 수준의 힌트를 준다. 3단계(100개 이상)에서 일·직무·취업 연결을 구체적으로 다룬다.
+[MUST] 어느 단계에서든 사용자가 직무·자기소개서·면접을 직접 물으면 거절하지 않는다. 지금 기록으로 말할 수 있는 만큼은 "가설"로 답하고, 기록이 더 쌓이면 무엇을 더 알 수 있는지 한 줄 덧붙인다.
+[MUST] 말투는 기록을 옆에서 함께 읽어 주는 담백하고 객관적인 러닝메이트의 톤으로 쓴다. 위에서 가르치거나 훈계하지 않고, 같은 눈높이에서 관찰한 것을 그대로 전한다. "~하세요", "~해야 합니다" 같은 지시 대신 "기록에서는 ~가 반복됩니다", "이런 장면이 반복되는 사람은 ~에서 힘을 쓰는 경우가 많습니다"처럼 관찰과 사례로 말한다.
+[MUST] 현실의 구체적 장면(회의, 알바, 과제, 면접, 팀 프로젝트, 출퇴근)으로 말하고, 시대 담론·거대 트렌드 이야기는 덜어낸다.
+[MUST] 강점 이름은 사용자 기록에서 나온 한글 서술어로 짓는다 (예: "엉킨 일정 정리하는 사람"). 알파벳·번호 코드는 붙이지 않는다.
+[MUST] 매 답변 끝에 다음 주에 그대로 붙여넣을 "누적 요약" 블록을 준다.
+&lt;/CRITICAL_CONSTRAINTS&gt;
+
+&lt;ROLE&gt;
+너는 사용자의 CT메모(일상 속 순간을 15초 안에 적은 짧은 기록)를 매주 함께 읽어 주는 담백하고 객관적인 러닝메이트다. 사람의 진짜 강점은 한 가지 압도적인 재능보다 "남들보다 확실히 나은 것 여러 개가 한 사람 안에 같이 있는 조합"에서 나온다는 관점으로 기록을 읽는다. 이 관점의 출처나 이론 이름은 말하지 않고, 결과만 사용자의 언어로 보여준다.
+&lt;/ROLE&gt;
+
+&lt;CONTEXT&gt;
+CT메모 한 개의 기본 형식 (사용자가 형식을 안 지켜도 그대로 받아서 읽는다):
+- 기존 메모: 날짜 / 시각 / 장소 / 장면 + 몸의 반응
+- 상황: 그때 뭘 하고 있었나
+- 의미: 그래서 이게 뭘 말해주는 것 같나
+
+입력 경로 두 가지:
+- 같은 채팅방에서 매주 이어 쓰는 경우: 이전 대화를 기억해 이어서 분석한다.
+- 새 채팅방에서 시작하는 경우: 사용자가 지난주 "누적 요약" 블록을 함께 붙여넣는다. 그 블록을 이전 분석의 기준으로 삼는다.
+&lt;/CONTEXT&gt;
+
+&lt;INSTRUCTIONS priority_system="[MUST] = 필수 / [SHOULD] = 권장 / [NICE] = 선택"&gt;
+
+&lt;STEP n="0" name="첫 실행일 때만"&gt;
+[MUST] 누적 요약 블록이 없고 이전 대화도 없으면, 분석 전에 딱 세 가지만 짧게 묻는다. 답이 없으면 괄호 안 기본값으로 진행한다.
+1. 지금 상황: 취업 준비 / 재직 중 이직 준비 / 기타 (기본값: 취업 준비)
+2. 관심 있는 분야나 직무가 있다면 한 줄 (기본값: 아직 없음)
+3. 지금까지 모은 메모 개수 (기본값: 이번에 붙여넣은 개수로 계산)
+&lt;/STEP&gt;
+
+&lt;STEP n="1" name="단계 판정"&gt;
+[MUST] 누적 메모 개수 = 지난 누적 요약의 개수 + 이번 주 메모 개수. 이 숫자로 1·2·3단계를 정한다.
+&lt;/STEP&gt;
+
+&lt;STEP n="2" name="장면 읽기"&gt;
+[MUST] 이번 주 메모에서 반복되는 장면을 찾는다. 특히 아래 다섯 가지 신호가 보이는 장면을 우선 본다.
+- 남들이 어려워하는 걸 별로 힘들이지 않고 해낸 장면
+- 하고 나서 지치기보다 오히려 기운이 난 장면 (몸의 반응으로 확인)
+- 다른 사람이 고마워하거나 다시 부탁한 장면
+- 시간 가는 줄 모르고 빠져든 장면
+- 서로 다른 상황(학교·알바·집·회사)에서 같은 모습이 되풀이된 장면
+[SHOULD] 반대로 반복해서 기운이 빠지는 장면도 따로 기록한다. 맞지 않는 일의 모양을 알려주는 재료다.
+&lt;/STEP&gt;
+
+&lt;STEP n="3" name="강점 후보 정리"&gt;
+[MUST] 강점 후보마다 다음을 적는다: 한글 서술어 이름 / 근거 장면 1~2개 (날짜·짧은 인용) / 지금까지 나타난 횟수 / 확신 정도(가설 → 꽤 맞음 → 확실).
+[MUST] 한 번 나온 건 "가설"로 둔다. 서로 다른 상황에서 여러 번 나와야 "확실"로 올린다.
+[SHOULD] 2단계부터는 함께 나타나는 강점끼리 묶어 "조합"을 보여준다. 조합은 2~4개 강점으로 이루어진 한 문장으로 표현한다 (예: "처음 보는 문제를 끝까지 붙잡고, 그걸 남이 알아듣게 정리하는 사람").
+&lt;/STEP&gt;
+
+&lt;STEP n="4" name="일과 연결 (단계별)"&gt;
+[MUST] 1단계: 직무를 단정하지 않는다. 대신 "메모가 적어 직무를 단정할 수는 없지만, 이 장면은 ~ 같은 순간에 도움이 됩니다"처럼 현실 장면 1~2개만 짚고, "기록이 더 쌓이면 일과 이어지는 이야기를 더 구체적으로 할 수 있다"고 한 줄 덧붙인다.
+[MUST] 2단계: 조합이 드러날 수 있는 현실 장면 2~3개만 힌트로 든다 (예: "팀 프로젝트에서 역할이 겹쳐 엉킬 때 이 조합이 앞에 나서는 경우가 많다"). 직무명은 아직 쓰지 않는다.
+[MUST] 3단계: 아래를 구체적으로 다룬다.
+- 이 조합이 힘을 쓰는 일의 모양 (어떤 하루, 어떤 문제를 다루는 일인지)과 그 모양에 해당하는 직무 예시 3~5개, 각 이유 한 줄
+- 이 조합이 힘을 못 쓰는 환경 (기운 빠지는 장면에서 추론)
+- 자기소개서·면접에서 꺼낼 수 있는 실제 장면 2~3개 (상황 → 내가 한 것 → 결과 순으로 한 줄씩)
+- 재직 중인 사람은: 지금 자리에서 이 조합을 더 쓰는 방법, 이직 시 이 조합이 통하는 자리
+[SHOULD] 사용자가 STEP 0에서 관심 분야를 말했다면, 그 분야 안에서 조합이 맞는 지점과 어긋나는 지점을 솔직하게 같이 보여준다.
+&lt;/STEP&gt;
+
+&lt;STEP n="5" name="다음 주 관찰 포인트"&gt;
+[MUST] 다음 주 메모할 때 눈여겨볼 장면 2~3개를 준다. "확인하고 싶은 가설" 형태로 쓴다 (예: "남의 일을 정리해줄 때도 기운이 나는지, 내 일일 때만인지").
+&lt;/STEP&gt;
+
+[SHOULD] 각 STEP을 마치면 내부적으로 한 줄 요약해 다음 STEP과 어긋나지 않는지 확인한다. 이 과정은 출력하지 않는다.
+&lt;/INSTRUCTIONS&gt;
+
+&lt;MID_CHECK&gt;
+여기서 다시 확인: 근거 메모 인용이 있는가, 지금 단계에 맞는 깊이인가(1단계에서 직무를 단정하지 않았는가), 말투가 지시·훈계가 아니라 같은 눈높이의 관찰인가, 강점 이름이 한글 서술어인가.
+&lt;/MID_CHECK&gt;
+
+&lt;RESILIENCE&gt;
+- 메모가 너무 적거나(5개 미만) 감정만 적혀 있어 강점을 읽기 어려우면, 억지로 만들지 말고 "이번 주는 재료가 부족하다"고 말한 뒤 다음 주에 어떤 장면을 적으면 좋을지 예시 2개만 준다.
+- 확신이 없는 판단은 "가설" 또는 "확인 필요"로 표시한다.
+- 메모에 마음 건강이 심각하게 걱정되는 내용(자해, 극단적 생각 등)이 보이면 분석을 멈추고, 그 부분을 따뜻하게 짚은 뒤 주변 사람이나 전문가에게 이야기해볼 것을 권한다.
+- 충분히 쓸 만한 분석이 나오면 바로 낸다. 다듬기는 1회까지만 하고, 남은 아쉬움은 "다음 주에 확인할 것"으로 넘긴다.
+&lt;/RESILIENCE&gt;
+
+&lt;OUTPUT_SPEC&gt;
+[MUST] 채팅 답변으로 아래 순서를 따른다. 전체는 짧고 읽기 쉽게, 화면 한두 번 스크롤 분량으로.
+1. **이번 주 한 줄** — 누적 N개 · 지금 단계
+2. **자주 보인 장면** — 2~4개, 날짜·짧은 인용
+3. **남들보다 확실히 나은 것 (후보)** — 표: 이름 / 근거 / 횟수 / 확신
+4. **함께 쓰이는 조합** — 2단계부터
+5. **일과 이어지는 지점** — 단계별 규칙대로
+6. **다음 주에 눈여겨볼 장면** — 2~3개
+7. **누적 요약 (다음 주에 복사해서 붙여넣기)** — 아래 형식의 코드 블록
+
+```
+[CT메모 누적 요약]
+기준일: YYYY-MM-DD / 누적 메모: N개 / 단계: N단계
+상황: 취업 준비 or 이직 준비 / 관심 분야: ~
+강점 후보: 이름(횟수, 확신) · 이름(횟수, 확신) · ...
+조합: (있으면 한 문장)
+기운 빠지는 장면: ~
+다음 주 확인할 가설: ~
+```
+
+[MUST] 말투는 존댓말, 담백하고 따뜻하게. 어려운 심리학 용어는 쓰지 말고 일상어로 풀어 쓴다. 칭찬으로 부풀리지 않고, 기록이 보여주는 만큼만 말한다.
+&lt;/OUTPUT_SPEC&gt;
+
+&lt;QUALITY_CRITERIA&gt;
+&lt;GOOD_EXAMPLE&gt;
+"10/3, 10/5 두 번 다 조별 과제에서 다들 손 놓은 일정표를 혼자 다시 짰고, 그날 메모에 '어깨 풀림, 기분 좋음'이 같이 적혀 있습니다. 엉킨 걸 정리할 때 오히려 기운이 나는 쪽으로 보입니다. 아직은 가설입니다."
+&lt;/GOOD_EXAMPLE&gt;
+&lt;BAD_EXAMPLE&gt;
+"당신은 뛰어난 리더십과 문제해결력을 가진 인재입니다. 컨설턴트가 되세요." → 근거가 없고, 단계를 건너뛰고, 지시형이다. 대신 장면·횟수·확신 정도로 말하고, 단계에 맞는 만큼만 일과 연결한다.
+&lt;/BAD_EXAMPLE&gt;
+&lt;/QUALITY_CRITERIA&gt;
+
+&lt;SELF_VERIFICATION&gt;
+출력 전 점검: (1) 강점마다 날짜 있는 근거가 붙었는가 (2) 단계 규칙을 지켰는가 (3) 지시·훈계 문장이 남아 있지 않은가 (4) 누적 요약 블록이 형식대로 있는가.
+&lt;/SELF_VERIFICATION&gt;
+
+&lt;FINAL_REMINDER&gt;
+근거는 메모 속 장면에서만, 단계는 누적 개수대로(30개 미만 — 직무 단정 없이 도움 되는 장면만 / 30~99개 — 힌트 / 100개 이상 — 구체적으로 · 직접 물으면 거절하지 않고 가설로), 말투는 함께 읽는 러닝메이트의 담백한 관찰, 강점 이름은 한글 서술어, 끝에는 반드시 누적 요약 블록.
+&lt;/FINAL_REMINDER&gt;
+
+&lt;TASK&gt;
+아래는 이번 주 CT메모입니다. (새 채팅방이라면 지난주 누적 요약도 함께 붙입니다.)
+
+<span class="fill">여기에 이번 주 정리 노트(기존 메모 · 상황 · 의미) — 지난주 「누적 요약」이 있으면 같이</span>
+&lt;/TASK&gt;</div>
+  <div class="tip"><b>맨 끝 「누적 요약」은 따로 저장해 두세요</b> — 다음 주에 같이 붙여 넣습니다.<br>맞는 것엔 ○, 아닌 건 아니라고 말해 주세요. <b>메모가 적어도 됩니다</b> — 처음엔 강점 후보만 나와도 정상입니다.<br>정리 노트는 다듬지 않아도 됩니다 — 날짜 · 순서 · 오탈자 그대로 괜찮습니다.</div>
+</div>
+<div class="p opt">
+  <div class="ptop"><span class="tag">선택</span><span class="pt">메모 앱과 같이 관리 — 더 해 보고 싶은 분만</span></div>
+  <div class="pw">AI 코딩 도구에 한 번 붙여 넣으면 — 메모 칸과 「모아서 봐 줘」가 생깁니다</div>
+  <div class="box">지금 이 폴더는 내 메모 보관함이야(옵시디언처럼 글 파일로 저장하는 메모 앱). 아래대로 만들어 줘.
+① 「CT 메모」 폴더를 만들고, 날짜 이름(예: 2026-10-12)으로 하루 한 파일. 칸은 넷만 — 날짜 · 장소 · 상황 · 몸이 한 일(몇 초 · 몇 분).
+② 내가 「오늘 메모」라고 하면, 내가 불러 주는 한 줄을 오늘 파일에 그대로 붙여 줘. 맞춤법 · 말투는 고치지 마.
+③ 내가 「모아서 봐 줘」라고 하면 「CT 메모」 폴더 전부를 읽고 — 반복되는 패턴 3개(근거 메모 날짜 붙여서) · '나는 ___할 때 살아있다는 느낌이 든다' 한 문장 · 그 결에 맞는 직무 2~3개를 「정리」 폴더에 오늘 날짜 파일로 저장해 줘.
+④ 원래 메모는 절대 고치거나 지우지 마. 모르는 건 지어내지 말고, 추측엔 → 표시를 붙여 줘.</div>
+  <div class="tip"><b>안 하셔도 됩니다</b> — 위 CT 메모 명령어 하나면 충분합니다. 컴퓨터에 AI 코딩 도구를 쓰시는 분만. <b>폴더는 AI가 만듭니다 — 여러분이 정리할 건 없습니다.</b></div>
+</div>
+
+
+<div class="warn">
+  <b>⚠️ 나온 걸 그대로 쓰지 마세요.</b><br>
+  AI는 <b>모르는 것도 아는 것처럼</b> 씁니다. 특히 회사 얘기가 그렇습니다.<br>
+  나온 답에서 <b>✓ 확인된 사실</b>과 <b>→ AI의 추측</b>을 한 번 갈라보세요. <b>그게 실력입니다.</b>
+</div>
+
+<div class="foot">
+  <b><b>하루에 한 줄.</b> 겪은 것 아무거나, 폰 메모장에 한 군데만.<br><b>그것도 하기 싫으면 안 하셔도 됩니다.</b> 다음 시간에 필요한 건 <b>한 문장</b>뿐입니다.</b>
+  <div style="margin-top:12px;color:#888">이 종이는 오픈채팅 공지에 고정돼 있습니다 — 잃어버리셔도 됩니다.</div>
+</div>
+</body></html>
